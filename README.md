@@ -2,6 +2,8 @@ WebPresentationTool
 ===================
 
 Tool to create presentations online and present over the internet
+![alt tag](https://raw.github.com/dragon5689/WebPresentationTool/master/editor.png)
+
 - users can register and then administrate their presentations
   - create presentations
   - edit presentations
