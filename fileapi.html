@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+        /**
+         * how to access in php: $_FILES['myinputname']
+         * and save in gridfs:
+         * ImageManager::saveUpload('myinputname');
+         */
+
+        var file = null;
+
+        function uploadFile() {
+            if(file == null){
+                alert("keine datei ausgewählt");
+                return;
+            }
+
+            var url = "uploadImage.php";
+
+            if(url=="")
+                alert("url setzen nicht vergessen");
+
+            var fieldName = "myinputname";
+            var formData = new FormData();
+            formData.append(fieldName, file);
+
+            var request = new XMLHttpRequest();
+
+            request.onload = function (e) {
+                console.log(e);
+            };
+
+            request.upload.onprogress = function (e) {
+                console.log(e);
+            };
+
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    var response = JSON.parse(request.responseText);
+
+                    if(response.success)
+                        console.log("kam an");
+                    else
+                        console.log("FEHLER");
+                }
+            };
+
+            request.open("POST", url);
+            request.send(formData);
+        }
+        function imageOnload() {
+            document.getElementById('myid').addEventListener('change', function (event) {
+                file = event.target.files[0];
+                console.log(file);
+            }, false);
+        }
+    </script>
+</head>
+<body onload="imageOnload()">
+<input type="file" id="myid" name="myinputname"/>
+<button onclick="uploadFile()">Upload</button>
+</body>
+</html>

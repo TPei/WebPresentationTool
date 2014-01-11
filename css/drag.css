@@ -1,0 +1,7 @@
+.drag {
+    border: 1px solid black;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
